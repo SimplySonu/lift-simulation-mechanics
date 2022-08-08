@@ -31,7 +31,6 @@ function addNewFloor() {
 	const singleFloor = document.createElement("div");
 	singleFloor.classList.add("single-floor");
 	singleFloor.id = `${floorContainer[0].childElementCount}`;
-
 	singleFloor.innerHTML = `
   <img
 						src="./src/arrow.svg"
@@ -50,14 +49,20 @@ function addNewFloor() {
 }
 
 function addLift() {
-	if (liftDetails.length < 11) {
+	if (
+		(window.screen.width < 800 && liftDetails.length < 5) ||
+		(window.screen.width > 800 && liftDetails.length < 12)
+	) {
 		const singleLift = document.createElement("div");
 		singleLift.classList.add("lift");
+		singleLift.innerHTML = `<div class=" door-width"></div>
+    <div class="door-width"></div>`;
 		initialFloor.appendChild(singleLift);
 		liftCount += 1;
 		liftDetails.push({ liftId: liftCount, busyStatus: false, floorNo: 0 });
 	} else {
 		liftButton.disabled = true;
+		liftButton.style.opacity = "0.5";
 		liftButton.innerText = "Max Lifts added!";
 	}
 }
@@ -70,8 +75,16 @@ function moveLift(id, buttonClicked) {
 
 function handleQueueRequests(id) {
 	const moveLiftNumber = nonBusyLift(id);
-	if (moveLiftNumber !== null) {
-		lift[moveLiftNumber].style.marginBottom = `${id * 200}px`;
+	if (moveLiftNumber !== null && moveLiftNumber[0] !== null) {
+		lift[moveLiftNumber[0]].style.marginBottom = `${id * 200}px`;
+		setTimeout(() => {
+			lift[moveLiftNumber[0]].children[0].classList.add("lift-door-left");
+			lift[moveLiftNumber[0]].children[1].classList.add("lift-door-right");
+		}, moveLiftNumber[1] + 1000);
+		setTimeout(() => {
+			lift[moveLiftNumber[0]].children[0].classList.remove("lift-door-left");
+			lift[moveLiftNumber[0]].children[1].classList.remove("lift-door-right");
+		}, moveLiftNumber[1] + 3000);
 	}
 }
 
@@ -115,14 +128,17 @@ function checkAvailableLift(id) {
 		liftDetails[nearestLiftAtIndex].busyStatus = true;
 		liftDetails[nearestLiftAtIndex].floorNo = id;
 		queue.splice(0, 1);
+		lift[nearestLiftAtIndex].style.transition = `margin ${
+			floorDifference * 2000 + "ms"
+		}`;
 		setTimeout(() => {
 			liftDetails[nearestLiftAtIndex].busyStatus = false;
 			resetActiveButtonColor(id);
 			if (queue.length > 0) {
 				handleQueueRequests(queue[0]);
 			}
-		}, floorDifference * 3000);
-		return nearestLiftAtIndex;
+		}, floorDifference * 2000 + 3000);
+		return [nearestLiftAtIndex, floorDifference * 2000];
 	}
 	return null;
 }
@@ -139,7 +155,7 @@ function checkAlreadyAvailableLiftInThatFloor(id) {
 					handleQueueRequests(queue[0]);
 				}
 			}, 3000);
-			return liftDetails[i].liftId;
+			return [liftDetails[i].liftId, 0];
 		}
 	}
 	return null;

@@ -41,17 +41,17 @@ body {
 }
 
 .lift {
-	background-color: #5a20cb;
+	background-color: grey;
 	width: 80px;
 	height: 80px;
-	transition: margin 2500ms;
 	border-radius: 2px;
+	display: flex;
+	justify-content: space-between;
 }
 
 .button-width {
 	width: 40px;
 	height: 40px;
-	/* background-color: orange; */
 	background-color: gray;
 	border-radius: 100%;
 	padding: 4px;
@@ -59,4 +59,40 @@ body {
 
 .up-listener {
 	transform: rotate(180deg);
+}
+
+.door-width {
+	background-color: #5a20cb;
+	width: 49%;
+	height: 100%;
+}
+
+.lift-door-left {
+	animation: left-animation 2.5s ease-in-out;
+}
+.lift-door-right {
+	animation: right-animation 2.5s ease-in-out;
+}
+
+@keyframes left-animation {
+	0% {
+		width: 49%;
+	}
+	50% {
+		width: 0%;
+	}
+	100% {
+		width: 49%;
+	}
+}
+@keyframes right-animation {
+	0% {
+		width: 49%;
+	}
+	50% {
+		width: 0%;
+	}
+	100% {
+		width: 49%;
+	}
 }
