@@ -68,9 +68,17 @@ function addLift() {
 }
 
 function moveLift(id, buttonClicked) {
-	queue.push(id);
-	changeActiveButtonColor(buttonClicked, id);
-	handleQueueRequests(id);
+	let flag = true;
+	for (let i = 0; i < liftDetails.length; i++) {
+		if (liftDetails[i].floorNo === id && liftDetails[i].busyStatus === true) {
+			flag = false;
+		}
+	}
+	if (flag) {
+		queue.push(id);
+		changeActiveButtonColor(buttonClicked, id);
+		handleQueueRequests(id);
+	}
 }
 
 function handleQueueRequests(id) {
