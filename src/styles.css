@@ -1,6 +1,6 @@
 body {
 	font-family: sans-serif;
-	background-color: #242b2e;
+	/* background-color: #242b2e; */
 	padding: 30px;
 }
 
@@ -12,7 +12,6 @@ body {
 
 .button-add-floor-lift-container {
 	display: flex;
-	flex-direction: column;
 	justify-content: center;
 	align-items: center;
 	gap: 10px;
@@ -20,11 +19,12 @@ body {
 
 .button-add-floor-lift-container > * {
 	width: 30%;
-	background-color: #5a20cb;
+	background-color: yellow;
+	border: none;
 	padding: 8px;
 	font-size: 20px;
 	border-radius: 10px;
-	color: white;
+	color: black;
 }
 
 .floor-container {
@@ -37,7 +37,7 @@ body {
 	gap: 20px;
 	height: 100px;
 	padding: 20px;
-	border-bottom: 1px solid white;
+	border-bottom: 1px solid black;
 }
 
 .lift {
@@ -50,19 +50,15 @@ body {
 }
 
 .button-width {
-	width: 40px;
-	height: 40px;
-	background-color: gray;
-	border-radius: 100%;
+	width: 60px;
+	height: 60px;
+	background-color: white;
+	border: 2px solid black;
 	padding: 4px;
 }
 
-.up-listener {
-	transform: rotate(180deg);
-}
-
 .door-width {
-	background-color: #5a20cb;
+	background-color: yellow;
 	width: 49%;
 	height: 100%;
 }

@@ -32,18 +32,13 @@ function addNewFloor() {
 	singleFloor.classList.add("single-floor");
 	singleFloor.id = `${floorContainer[0].childElementCount}`;
 	singleFloor.innerHTML = `
-  <img
-						src="./src/arrow.svg"
-						alt=""
-						class="button-width up-listener"
-						id=${floorContainer[0].childElementCount + ""}
-					/>
-					<img
-						src="./src/arrow.svg"
-						alt=""
-						class="button-width down-listener"
-						id=${floorContainer[0].childElementCount + ""}
-					/>`;
+	<button class="button-width up-listener" id=${
+		floorContainer[0].childElementCount + ""
+	}>UP</button>
+	<button class="button-width down-listener" id=${
+		floorContainer[0].childElementCount + ""
+	}>DOWN</button>`;
+
 	floorContainer[0].insertBefore(singleFloor, floorContainer[0].children[0]);
 	addListener(singleFloor);
 }
@@ -72,11 +67,11 @@ function moveLift(id, buttonClicked) {
 	for (let i = 0; i < liftDetails.length; i++) {
 		if (liftDetails[i].floorNo === id && liftDetails[i].busyStatus === true) {
 			flag = false;
+			break;
 		}
 	}
 	if (flag) {
 		queue.push(id);
-		changeActiveButtonColor(buttonClicked, id);
 		handleQueueRequests(id);
 	}
 }
@@ -104,19 +99,6 @@ function nonBusyLift(id) {
 	return checkAvailableLift(id);
 }
 
-function changeActiveButtonColor(buttonClicked, id) {
-	if (buttonClicked === "up") {
-		upButtons[upButtons.length - id - 1].style.backgroundColor = "orange";
-	} else {
-		downButtons[downButtons.length - id - 1].style.backgroundColor = "orange";
-	}
-}
-
-function resetActiveButtonColor(id) {
-	upButtons[upButtons.length - id - 1].style.backgroundColor = "grey";
-	downButtons[downButtons.length - id - 1].style.backgroundColor = "grey";
-}
-
 function checkAvailableLift(id) {
 	let nearestLift = Number.MAX_SAFE_INTEGER;
 	let nearestLiftAtIndex = null;
@@ -141,7 +123,6 @@ function checkAvailableLift(id) {
 		}`;
 		setTimeout(() => {
 			liftDetails[nearestLiftAtIndex].busyStatus = false;
-			resetActiveButtonColor(id);
 			if (queue.length > 0) {
 				handleQueueRequests(queue[0]);
 			}
@@ -158,7 +139,6 @@ function checkAlreadyAvailableLiftInThatFloor(id) {
 			queue.splice(0, 1);
 			setTimeout(() => {
 				liftDetails[i].busyStatus = false;
-				resetActiveButtonColor(id);
 				if (queue.length > 0) {
 					handleQueueRequests(queue[0]);
 				}
