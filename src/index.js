@@ -45,8 +45,11 @@ function addNewFloor() {
 
 function addLift() {
 	if (
-		(window.screen.width < 800 && liftDetails.length < 5) ||
-		(window.screen.width > 800 && liftDetails.length < 12)
+		(window.screen.width < 400 && liftDetails.length < 2) ||
+		(window.screen.width > 800 && liftDetails.length < 12) ||
+		(window.screen.width > 400 &&
+			window.screen.width < 800 &&
+			liftDetails.length < 4)
 	) {
 		const singleLift = document.createElement("div");
 		singleLift.classList.add("lift");

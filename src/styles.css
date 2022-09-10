@@ -1,6 +1,5 @@
 body {
 	font-family: sans-serif;
-	/* background-color: #242b2e; */
 	padding: 30px;
 }
 
@@ -90,5 +89,33 @@ body {
 	}
 	100% {
 		width: 49%;
+	}
+}
+
+@media only screen and (max-width: 700px) {
+	body {
+		padding: 20px 0;
+	}
+	.button-add-floor-lift-container {
+		flex-direction: column;
+	}
+
+	.button-add-floor-lift-container > * {
+		width: 80%;
+	}
+	.button-width {
+		width: 30px;
+		height: 30px;
+		padding: 2px;
+		font-size: 7px;
+	}
+
+	.lift {
+		width: 50px;
+		height: 50px;
+	}
+	.door-width {
+		width: 49%;
+		height: 100%;
 	}
 }
