@@ -63,18 +63,27 @@ body {
 }
 
 .lift-door-left {
-	animation: left-animation 2.5s ease-in-out;
+	animation: left-animation 2.4s ease-in-out;
 }
 .lift-door-right {
-	animation: right-animation 2.5s ease-in-out;
+	animation: right-animation 2.4s ease-in-out;
 }
 
 @keyframes left-animation {
 	0% {
 		width: 49%;
 	}
+	40% {
+		width: 0%;
+	}
 	50% {
 		width: 0%;
+	}
+	60% {
+		width: 0%;
+	}
+	80% {
+		width: 45%;
 	}
 	100% {
 		width: 49%;
@@ -84,8 +93,17 @@ body {
 	0% {
 		width: 49%;
 	}
+	40% {
+		width: 0%;
+	}
 	50% {
 		width: 0%;
+	}
+	60% {
+		width: 0%;
+	}
+	80% {
+		width: 45%;
 	}
 	100% {
 		width: 49%;
