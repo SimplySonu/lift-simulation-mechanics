@@ -8,6 +8,10 @@ const upButtons = document.getElementsByClassName("up-listener");
 const downButtons = document.getElementsByClassName("down-listener");
 const liftButton = document.getElementById("add-lift-button");
 
+// connecting to socket
+const socket = io.connect("http://localhost:5000/");
+socket.on("addNewFloor", () => addNewFloor());
+
 let liftCount = 0;
 const queue = [];
 const liftDetails = [{ liftId: 0, busyStatus: false, floorNo: 0 }];
@@ -15,7 +19,7 @@ const liftDetails = [{ liftId: 0, busyStatus: false, floorNo: 0 }];
 liftButton.addEventListener("click", addLift);
 
 addFloor.addEventListener("click", () => {
-	addNewFloor();
+	socket.emit("addNewFloor");
 });
 
 initialUpButton[0].addEventListener("click", () => moveLift(0, "up"));
