@@ -89,8 +89,10 @@ function moveLift(id, buttonClicked) {
 		}
 	}
 	if (flag) {
-		queue.push(id);
-		handleQueueRequests(id);
+		if (!queue.includes(id)) {
+			queue.push(id);
+			handleQueueRequests(id);
+		}
 	}
 }
 
